@@ -1,0 +1,135 @@
+###############################################################################
+#     yedrc
+#     Zach McMichael
+###############################################################################
+
+### @plugins ###
+
+# 'yedrc' is already loaded by init.c
+# That's how we're loading this file.
+
+# NOTE: these aren't working right now
+# plugin-load 'lazy_plug'
+# plugin-load 'run_on_ft'
+#    lazy-plug-ft ".c"     'lang/c'
+#    lazy-plug-ft ".cpp"   'lang/c'
+#    lazy-plug-ft ".sh"    'lang/sh'
+#    lazy-plug-ft ".bjou"  'lang/bjou'
+#    lazy-plug-ft ".tex"   'lang/latex'
+#    lazy-plug-ft ".py"    'lang/python'
+#    lazy-plug-ft ".yedrc" 'lang/yedrc'
+#    lazy-plug-ft ".jgr"   'lang/jgraph'
+#    lazy-plug-ft ".glsl"  'lang/glsl'
+#    lazy-plug-ft ".si"    'lang/simon'
+
+plugin-load 'lang/c'
+plugin-load 'lang/cpp'
+plugin-load 'lang/sh'
+plugin-load 'lang/bjou'
+plugin-load 'lang/latex'
+plugin-load 'lang/python'
+plugin-load 'lang/yedrc'
+plugin-load 'lang/jgraph'
+plugin-load 'lang/glsl'
+plugin-load 'lang/conf'
+plugin-load 'lang/simon'
+plugin-load 'lang/slide'
+plugin-load 'find_bracket'
+plugin-load 'auto_paren'
+
+
+plugin-load 'vimish'
+# plugin-load 'brace_hl'
+plugin-load 'paren_hl'
+# plugin-load 'tag_hl'
+# plugin-load 'cursor_word_hl'
+plugin-load 'log_hl'
+plugin-load 'indent_c'
+plugin-load 'comment'
+plugin-load 'align'
+plugin-load 'autotrim'
+plugin-load 'completer'
+plugin-load 'grep'
+plugin-load 'find_file'
+plugin-load 'man'
+# plugin-load 'style_picker'
+plugin-load 'style_use_term_bg'
+# plugin-load 'focus_frame'
+plugin-load 'style_pack'
+plugin-load 'styles/casey' # this will load my modified version
+plugin-load 'mk_src_pair'
+plugin-load 'builder'
+plugin-load 'ctags'
+plugin-load 'hook'
+plugin-load 'jump_stack'
+plugin-load 'shell_run'
+plugin-load 'macro'
+plugin-load 'chatty_kathy'
+
+### @variables ###
+set tab-width                     4
+set latex-comp-prg                "xelatex -halt-on-error --interaction=nonstopmode '%'"
+set latex-view-prg                "echo \"zathura '%'\" | $SHELL &"
+set latex-update-view-prg         "" # "pkill -HUP mupdf 2>&1 > /dev/null"
+set cursor-line                   "yes"
+set vimish-insert-no-cursor-line  "yes"
+set cursor-word-hl-idle-threshold 1500
+# ctags disabled by default -- enable per project
+# (should also set 'ctags-flags' and 'ctags-enable-extra-highlighting' if desired)
+set use-ctags "no"
+set chatty-kathy-id                 "kammerdienerb"
+set chatty-kathy-port               2324
+set chatty-kathy-server             "com1635.eecs.utk.edu"
+set chatty-kathy-client-autoconnect "yes"
+set macro-instant-playback          "yes"
+set go-menu-force-split             "no"
+
+### @style ###
+style first-dark
+
+### @keybindings ###
+vimish-bind  normal  "spc c o"    comment-toggle
+vimish-bind  normal  "spc l c"    latex-compile-current-file
+vimish-bind  normal  "spc l v"    latex-view-current-file
+vimish-bind  normal  "spc r d"    redraw
+vimish-bind  normal  "spc v s p"  frame-vsplit
+vimish-bind  normal  "spc h s p"  frame-hsplit
+vimish-bind  normal  "spc b o"    command-prompt "buffer "
+vimish-bind  normal  "spc b d"    buffer-delete
+vimish-bind  normal  "ctrl-n"     buffer-next
+vimish-bind  normal  "ctrl-p"     buffer-prev
+vimish-bind  normal  "M M"        man-word
+vimish-bind  normal  "L L"        command-prompt "cursor-line "
+vimish-bind  normal  "ctrl-l"     frame-next
+# Don't really use this that much and would prefer to not see the warnings.
+# vimish-bind  normal  "ctrl-h"     frame-prev
+vimish-bind  normal  ">"          indent
+vimish-bind  normal  "<"          unindent
+vimish-bind  normal  "spc g"      grep
+vimish-bind  normal  "spc f"      find-file
+vimish-bind  normal  "spc a l"    command-prompt "align "
+vimish-bind  normal  "ctrl-y"     multi "builder-start" "builder-view-output" "special-buffer-prepare-unfocus *builder-output"
+vimish-bind  normal  "E E"        builder-jump-to-error
+vimish-bind  normal  "spc t"      ctags-find
+vimish-bind  normal  "T T"        multi jump-stack-push ctags-jump-to-definition
+vimish-bind  normal  "bsp"        jump-stack-pop
+vimish-bind  normal  "S S"        command-prompt "shell-run "
+vimish-bind  normal  "tab"        go-menu
+vimish-bind  normal  "ctrl-/"     kammerdienerb-find-cursor-word
+vimish-bind  normal  "%"          brace-goto-other
+
+### @hooks ###
+hook post-write                 \
+    if use-ctags                \
+        'multi                  \
+            "ctags-gen"         \
+            "ctags-hl-reparse"'
+
+### @project ###
+# Load directory-specific rc file.
+yedrc-load ".yedrc"
+
+
+
+set builder-build-command 'gcc -g -shared -fPIC -lyed loc_history.c -o loc_history.so'
+plugin-load 'loc_history'
