@@ -25,7 +25,6 @@ int yed_plugin_boot(yed_plugin *self) {
 
 void brace_goto_other(int nargs, char** args){
     yed_frame *frame;
-    int        save_beg_row, save_end_row;
 
     frame = ys->active_frame;
 
@@ -39,7 +38,6 @@ void brace_goto_other(int nargs, char** args){
     g = yed_buff_get_glyph(frame->buffer, frame->cursor_line, frame->cursor_col);
 
     int        row, col;
-    int        first_vis_row;
     int        balance;
     yed_line  *line;
 

@@ -34,12 +34,14 @@ plugin-load 'lang/glsl'
 plugin-load 'lang/conf'
 plugin-load 'lang/simon'
 plugin-load 'lang/slide'
+plugin-load 'line_numbers'
+
+### Zach's Plugins ###
 plugin-load 'find_bracket'
 plugin-load 'auto_paren'
 
-
 plugin-load 'vimish'
-# plugin-load 'brace_hl'
+plugin-load 'brace_hl'
 plugin-load 'paren_hl'
 # plugin-load 'tag_hl'
 # plugin-load 'cursor_word_hl'
@@ -88,7 +90,7 @@ set go-menu-force-split             "no"
 style first-dark
 
 ### @keybindings ###
-vimish-bind  normal  "spc c o"    comment-toggle
+vimish-bind  normal  "ctrl-c ctrl-c"    comment-toggle
 vimish-bind  normal  "spc l c"    latex-compile-current-file
 vimish-bind  normal  "spc l v"    latex-view-current-file
 vimish-bind  normal  "spc r d"    redraw
@@ -117,6 +119,8 @@ vimish-bind  normal  "S S"        command-prompt "shell-run "
 vimish-bind  normal  "tab"        go-menu
 vimish-bind  normal  "ctrl-/"     kammerdienerb-find-cursor-word
 vimish-bind  normal  "%"          brace-goto-other
+vimish-bind  insert  "f f"     cursor-right
+vimish-bind  insert  "j j"        vimish-exit-insert
 
 ### @hooks ###
 hook post-write                 \
@@ -129,7 +133,5 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-
-
 set builder-build-command 'gcc -g -shared -fPIC -lyed loc_history.c -o loc_history.so'
-plugin-load 'loc_history'
+# plugin-load 'loc_history'

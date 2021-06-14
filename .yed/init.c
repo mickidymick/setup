@@ -393,6 +393,16 @@ void kammerdienerb_go_menu(int n_args, char **args) {
         row += 1;
     }
 
+    /* add yedrc */
+    if (row > 1) {
+        yed_buffer_add_line_no_undo(buff);
+    }
+    bname = "~/.yed/yedrc";
+    for (i = 0; i < strlen(bname); i += 1) {
+        yed_append_to_line_no_undo(buff, row, G(bname[i]));
+    }
+    row += 1;
+
     YEXE("special-buffer-prepare-focus", "*go-menu");
     if (ys->active_frame) {
         YEXE("buffer", "*go-menu");

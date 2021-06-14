@@ -1,1 +1,1 @@
-/home/jmcmicha/.yed/loc_history.c 83,1
+/home/jmcmicha/.yed/loc_history.c 15 10
