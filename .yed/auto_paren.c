@@ -84,6 +84,10 @@ void completer_auto_match_buff_post_insert_handler(yed_event *event) {
 
         brace_col = frame->cursor_col - 1;
 
+        if(brace_col != line->visual_width) {
+            goto insert_line;
+        }
+
         i = 0;
 
         while (i < brace_col
@@ -108,6 +112,7 @@ void completer_auto_match_buff_post_insert_handler(yed_event *event) {
         return;
     }
 
+insert_line:;
     yed_insert_into_line(frame->buffer, save_row, save_col, G(match));
 }
 

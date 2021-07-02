@@ -40,12 +40,13 @@ int yed_plugin_boot(yed_plugin *self) {
 
     yed_log("init.c");
     yed_log("\n# ********************************************************");
-    yed_log("\n# **  This is Brandon Kammerdiener's yed configuration  **");
+    yed_log("\n# **  This is Zach McMichael's yed configuration  **");
     yed_log("\n# ********************************************************");
 
     yed_plugin_set_command(self, "special-buffer-prepare-focus",      kammerdienerb_special_buffer_prepare_focus);
     yed_plugin_set_command(self, "special-buffer-prepare-jump-focus", kammerdienerb_special_buffer_prepare_jump_focus);
     yed_plugin_set_command(self, "special-buffer-prepare-unfocus",    kammerdienerb_special_buffer_prepare_unfocus);
+    yed_plugin_set_command(self, "qa",                                yed_default_command_quit);
     yed_log("\ninit.c: added overrides for 'special-buffer-prepare-*' commands");
 
     get_or_make_buffer(ARGS_SCRATCH_BUFF);

@@ -36,9 +36,13 @@ plugin-load 'lang/simon'
 plugin-load 'lang/slide'
 plugin-load 'line_numbers'
 
-### Zach's Plugins ###
+### Zach's Personal Plugins ###
 plugin-load 'find_bracket'
+plugin-load 'loc_history'
 plugin-load 'auto_paren'
+# plugin-load 'add_template'
+### Zach's Modified Plugins ###'
+plugin-load 'builder'
 
 plugin-load 'vimish'
 plugin-load 'brace_hl'
@@ -60,7 +64,6 @@ plugin-load 'style_use_term_bg'
 plugin-load 'style_pack'
 plugin-load 'styles/casey' # this will load my modified version
 plugin-load 'mk_src_pair'
-plugin-load 'builder'
 plugin-load 'ctags'
 plugin-load 'hook'
 plugin-load 'jump_stack'
@@ -79,7 +82,7 @@ set cursor-word-hl-idle-threshold 1500
 # ctags disabled by default -- enable per project
 # (should also set 'ctags-flags' and 'ctags-enable-extra-highlighting' if desired)
 set use-ctags "no"
-set chatty-kathy-id                 "kammerdienerb"
+set chatty-kathy-id                 "mickidymick"
 set chatty-kathy-port               2324
 set chatty-kathy-server             "com1635.eecs.utk.edu"
 set chatty-kathy-client-autoconnect "yes"
@@ -119,7 +122,7 @@ vimish-bind  normal  "S S"        command-prompt "shell-run "
 vimish-bind  normal  "tab"        go-menu
 vimish-bind  normal  "ctrl-/"     kammerdienerb-find-cursor-word
 vimish-bind  normal  "%"          brace-goto-other
-vimish-bind  insert  "f f"     cursor-right
+vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert
 
 ### @hooks ###
@@ -133,5 +136,5 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-set builder-build-command 'gcc -g -shared -fPIC -lyed loc_history.c -o loc_history.so'
-# plugin-load 'loc_history'
+# set builder-build-command 'gcc -g -shared -fPIC -lyed add_template.c -o add_template.so'
+# plugin-load 'add_template'
