@@ -26,10 +26,10 @@ void set_template(int nargs, char** args) {
     }
 
     if(nargs != 1) {
-        yed_log("Must have the template name as an argument you gave %d args\n", nargs);
-        LOG_EXIT();
+        yed_cerr("Must have the template name as an argument you gave %d args\n", nargs);
         return;
     }
+
     strcpy(app, "/");
     strcat(app, args[0]);
     strcat(app, ".txt");
@@ -43,7 +43,7 @@ void set_template(int nargs, char** args) {
         strcat(str, app);
     }
 
-    yed_log("file: %s\n", str);
+    yed_cprint("file: %s\n", str);
 
     FILE *fp;
 
@@ -53,22 +53,19 @@ void set_template(int nargs, char** args) {
         return;
     }
 
-    yed_log("  \n");
+/*     yed_log("  \n"); */
     const char s[2] = " ";
     char *tmp_path;
     char *tmp_row;
     char *tmp_col;
 
-    int start_row = frame->buffer->last_cursor_row;
+    int start_row = frame->cursor_line;
     while( fgets( line, 512, fp ) != NULL ) {
-        yed_log("line:%s", line);
+        yed_cprint("line:%s", line);
 /*         yed_buff_insert_line_no_undo(frame->buffer, start_row); */
-        yed_log("last row:%d\n", start_row);
+        yed_cprint("last row:%d\n", start_row);
         start_row++;
         yed_buff_insert_string_no_undo(frame->buffer, line, start_row, 1);
     }
     fclose(fp);
-
-    LOG_EXIT();
-
 }

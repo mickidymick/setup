@@ -40,7 +40,7 @@ plugin-load 'line_numbers'
 plugin-load 'find_bracket'
 plugin-load 'loc_history'
 plugin-load 'auto_paren'
-# plugin-load 'add_template'
+plugin-load 'add_template'
 ### Zach's Modified Plugins ###'
 plugin-load 'builder'
 
