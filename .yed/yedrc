@@ -79,6 +79,7 @@ set latex-update-view-prg         "" # "pkill -HUP mupdf 2>&1 > /dev/null"
 set cursor-line                   "yes"
 set vimish-insert-no-cursor-line  "yes"
 set cursor-word-hl-idle-threshold 1500
+set cursor-move-clears-search     "no"
 # ctags disabled by default -- enable per project
 # (should also set 'ctags-flags' and 'ctags-enable-extra-highlighting' if desired)
 set use-ctags "no"

@@ -442,6 +442,12 @@ void kammerdienerb_go_menu_key_handler(yed_event *event) {
 void kammerdienerb_find_cursor_word(int n_args, char **args) {
     char *word;
 
+    if (ys->current_search != NULL) {
+        ys->current_search = NULL;
+        ys->redraw = 1;
+        return;
+    }
+
     if (n_args != 0) {
         yed_cerr("expected 0 arguments, but got %d", n_args);
         return;
