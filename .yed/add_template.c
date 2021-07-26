@@ -7,7 +7,6 @@ int set_template_completion(char *name, struct yed_completion_results_t *comp_re
     array_t list;
     list = array_make(char *);
     char *tmp;
-    char **tmp1;
     char loc[256];
 
     tmp = abs_path("~/.yed/templates", loc);
@@ -89,7 +88,7 @@ void set_template(int nargs, char** args) {
     while( fgets( line, 512, fp ) != NULL ) {
         start_row++;
         yed_buff_insert_string(frame->buffer, line, start_row, 1);
-        yed_merge_undo_records(frame, frame->buffer);
+        yed_merge_undo_records(frame->buffer);
     }
     fclose(fp);
 }
