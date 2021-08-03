@@ -113,14 +113,9 @@ void syntax_bjou_line_handler(yed_event *event) {
 }
 
 void syntax_bjou_buff_mod_pre_handler(yed_event *event) {
-    yed_frame *frame;
-
-    frame = event->frame;
-
-    if (!frame
-    ||  !frame->buffer
-    ||  frame->buffer->kind != BUFF_KIND_FILE
-    ||  frame->buffer->ft != yed_get_ft("bJou")) {
+    if (event->buffer == NULL
+    ||  event->buffer->kind != BUFF_KIND_FILE
+    ||  event->buffer->ft != yed_get_ft("bJou")) {
         return;
     }
 
@@ -128,14 +123,9 @@ void syntax_bjou_buff_mod_pre_handler(yed_event *event) {
 }
 
 void syntax_bjou_buff_mod_post_handler(yed_event *event) {
-    yed_frame *frame;
-
-    frame = event->frame;
-
-    if (!frame
-    ||  !frame->buffer
-    ||  frame->buffer->kind != BUFF_KIND_FILE
-    ||  frame->buffer->ft != yed_get_ft("bJou")) {
+    if (event->buffer == NULL
+    ||  event->buffer->kind != BUFF_KIND_FILE
+    ||  event->buffer->ft != yed_get_ft("bJou")) {
         return;
     }
 

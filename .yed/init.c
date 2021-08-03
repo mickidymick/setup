@@ -379,6 +379,7 @@ void kammerdienerb_go_menu(int n_args, char **args) {
     char                                         *bname;
 
     buff = get_or_make_buffer(ARGS_GO_MENU_BUFF);
+    buff->flags &= ~BUFF_RD_ONLY;
     yed_buff_clear_no_undo(buff);
 
     row = 1;
@@ -394,14 +395,17 @@ void kammerdienerb_go_menu(int n_args, char **args) {
     }
 
     /* add yedrc */
-    if (row > 1) {
-        yed_buffer_add_line_no_undo(buff);
-    }
-    bname = "~/.yed/yedrc";
-    for (i = 0; i < strlen(bname); i += 1) {
-        yed_append_to_line_no_undo(buff, row, G(bname[i]));
+    if(yed_get_buffer_by_path("~/.yed/yedrc") == NULL) {
+        if (row > 1) {
+            yed_buffer_add_line_no_undo(buff);
+        }
+        bname = "~/.yed/yedrc";
+        for (i = 0; i < strlen(bname); i += 1) {
+            yed_append_to_line_no_undo(buff, row, G(bname[i]));
+        }
     }
     row += 1;
+    buff->flags |= BUFF_RD_ONLY;
 
     YEXE("special-buffer-prepare-focus", "*go-menu");
     if (ys->active_frame) {
