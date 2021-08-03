@@ -84,7 +84,7 @@ int yed_plugin_boot(yed_plugin *self) {
     buff_post_mod_handler.fn     = builder_buff_post_mod_handler;
     buff_post_write_handler.kind = EVENT_BUFFER_POST_WRITE;
     buff_post_write_handler.fn   = builder_buff_post_write_handler;
-    cursor_moved_handler.kind    = EVENT_CURSOR_MOVED;
+    cursor_moved_handler.kind    = EVENT_CURSOR_POST_MOVE;
     cursor_moved_handler.fn      = builder_cursor_moved_handler;
     style_handler.kind           = EVENT_STYLE_CHANGE;
     style_handler.fn             = builder_style_handler;

@@ -1,5 +1,4 @@
 #include <yed/plugin.h>
-#include <yed/menu_frame.h>
 
 void kammerdienerb_special_buffer_prepare_focus(int n_args, char **args);
 void kammerdienerb_special_buffer_prepare_jump_focus(int n_args, char **args);

@@ -122,6 +122,7 @@ vimish-bind  normal  "bsp"        jump-stack-pop
 vimish-bind  normal  "S S"        command-prompt "shell-run "
 vimish-bind  normal  "tab"        go-menu
 vimish-bind  normal  "ctrl-/"     kammerdienerb-find-cursor-word
+vimish-bind  normal  "ctrl-t"     set-template "for.txt"
 vimish-bind  normal  "%"          brace-goto-other
 vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert

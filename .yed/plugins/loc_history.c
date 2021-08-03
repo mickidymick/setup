@@ -36,7 +36,7 @@ int yed_plugin_boot(yed_plugin *self) {
     h.fn   = set_start_loc_from_history;
     yed_plugin_add_event_handler(self, h);
 
-    h.kind = EVENT_CURSOR_MOVED;
+    h.kind = EVENT_CURSOR_POST_MOVE;
     h.fn   = update_loc_history;
     yed_plugin_add_event_handler(self, h);
 

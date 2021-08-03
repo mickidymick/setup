@@ -40,7 +40,7 @@ plugin-load 'line_numbers'
 plugin-load 'find_bracket'
 plugin-load 'loc_history'
 plugin-load 'auto_paren'
-# plugin-load 'add_template'
+plugin-load 'add_template'
 ### Zach's Modified Plugins ###'
 plugin-load 'builder'
 
@@ -79,6 +79,7 @@ set latex-update-view-prg         "" # "pkill -HUP mupdf 2>&1 > /dev/null"
 set cursor-line                   "yes"
 set vimish-insert-no-cursor-line  "yes"
 set cursor-word-hl-idle-threshold 1500
+set cursor-move-clears-search     "no"
 # ctags disabled by default -- enable per project
 # (should also set 'ctags-flags' and 'ctags-enable-extra-highlighting' if desired)
 set use-ctags "no"
@@ -121,6 +122,7 @@ vimish-bind  normal  "bsp"        jump-stack-pop
 vimish-bind  normal  "S S"        command-prompt "shell-run "
 vimish-bind  normal  "tab"        go-menu
 vimish-bind  normal  "ctrl-/"     kammerdienerb-find-cursor-word
+vimish-bind  normal  "ctrl-t"     set-template "for.txt"
 vimish-bind  normal  "%"          brace-goto-other
 vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert
