@@ -11,9 +11,7 @@ int set_template_completion(char *name, struct yed_completion_results_t *comp_re
 
     tmp = abs_path("~/.yed/templates", loc);
     if(tmp == NULL) {
-        LOG_FN_ENTER();
         yed_cerr("~/.yed/template not found");
-        LOG_EXIT();
         return 0;
     }
 
