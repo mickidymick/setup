@@ -37,13 +37,16 @@ plugin-load 'lang/conf'
 plugin-load 'lang/simon'
 plugin-load 'lang/slide'
 plugin-load 'line_numbers'
+plugin-load 'calc'
 
 ### Zach's Personal Plugins ###
 # plugin-load 'find_bracket'
-plugin-load 'loc_history'
+# plugins-add-dir '~/.yed/ypm/plugins'
+# plugin-load 'loc_history'
 # plugin-load 'auto_paren'
 # plugin-load 'add_template'
 # plugin-load 'ypm'
+
 ### Zach's Modified Plugins ###'
 plugin-load 'builder'
 
@@ -143,6 +146,5 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-set builder-build-command 'gcc -g -shared -fPIC -lyed ypm.c -o ypm.so'
-plugins-add-dir '~/.yed/ypm'
+set builder-build-command 'gcc $(yed --print-cflags) $(yed --print-ldflags) -o ypm.so -g ypm.c'
 plugin-load 'ypm'
