@@ -22,22 +22,22 @@
 #    lazy-plug-ft ".glsl"  'lang/glsl'
 #    lazy-plug-ft ".si"    'lang/simon'
 
-plugins-add-dir '~/.yed/plugins'
+# plugins-add-dir '~/.yed/plugins'
 
-plugin-load 'lang/c'
-plugin-load 'lang/cpp'
-plugin-load 'lang/sh'
-plugin-load 'lang/bjou'
-plugin-load 'lang/latex'
-plugin-load 'lang/python'
-plugin-load 'lang/yedrc'
-plugin-load 'lang/jgraph'
-plugin-load 'lang/glsl'
-plugin-load 'lang/conf'
-plugin-load 'lang/simon'
-plugin-load 'lang/slide'
-plugin-load 'line_numbers'
-plugin-load 'calc'
+# plugin-load 'lang/c'
+# plugin-load 'lang/cpp'
+# plugin-load 'lang/sh'
+# plugin-load 'lang/bjou'
+# plugin-load 'lang/latex'
+# plugin-load 'lang/python'
+# plugin-load 'lang/yedrc'
+# plugin-load 'lang/jgraph'
+# plugin-load 'lang/glsl'
+# plugin-load 'lang/conf'
+# plugin-load 'lang/simon'
+# plugin-load 'lang/slide'
+# plugin-load 'line_numbers'
+# plugin-load 'calc'
 
 ### Zach's Personal Plugins ###
 # plugin-load 'find_bracket'
@@ -48,34 +48,30 @@ plugin-load 'calc'
 # plugin-load 'ypm'
 
 ### Zach's Modified Plugins ###'
-plugin-load 'builder'
+# plugin-load 'builder'
 
-plugin-load 'vimish'
-plugin-load 'brace_hl'
-plugin-load 'paren_hl'
-# plugin-load 'tag_hl'
-# plugin-load 'cursor_word_hl'
-plugin-load 'log_hl'
-plugin-load 'indent_c'
-plugin-load 'comment'
-plugin-load 'align'
-plugin-load 'autotrim'
-plugin-load 'completer'
-plugin-load 'grep'
-plugin-load 'find_file'
-plugin-load 'man'
-# plugin-load 'style_picker'
-plugin-load 'style_use_term_bg'
-# plugin-load 'focus_frame'
-plugin-load 'style_pack'
-plugin-load 'styles/casey' # this will load my modified version
-plugin-load 'mk_src_pair'
-plugin-load 'ctags'
-plugin-load 'hook'
-plugin-load 'jump_stack'
-plugin-load 'shell_run'
-plugin-load 'macro'
-plugin-load 'chatty_kathy'
+# plugin-load 'vimish'
+# plugin-load 'brace_hl'
+# plugin-load 'paren_hl'
+# plugin-load 'log_hl'
+# plugin-load 'indent_c'
+# plugin-load 'comment'
+# plugin-load 'align'
+# plugin-load 'autotrim'
+# plugin-load 'completer'
+# plugin-load 'grep'
+# plugin-load 'find_file'
+# plugin-load 'man'
+# plugin-load 'style_use_term_bg'
+# plugin-load 'style_pack'
+# plugin-load 'styles/casey' # this will load my modified version
+# plugin-load 'mk_src_pair'
+# plugin-load 'ctags'
+# plugin-load 'hook'
+# plugin-load 'jump_stack'
+# plugin-load 'shell_run'
+# plugin-load 'macro'
+# plugin-load 'chatty_kathy'
 
 ### @variables ###
 set tab-width                       4
@@ -95,8 +91,6 @@ set chatty-kathy-server             "com1635.eecs.utk.edu"
 set chatty-kathy-client-autoconnect "yes"
 set macro-instant-playback          "yes"
 set go-menu-force-split             "no"
-set ypm-uname                       "mickidymick"
-set ypm-paswd                       "Awesome$aucE1"
 
 ### @style ###
 style first-dark
@@ -146,5 +140,6 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-set builder-build-command 'gcc $(yed --print-cflags) $(yed --print-ldflags) -o ypm.so -g ypm.c'
+# set builder-build-command 'gcc $(yed --print-cflags) $(yed --print-ldflags) -o ypm.so -g ypm.c'
+plugins-add-dir '~/.yed/ypm_build'
 plugin-load 'ypm'
