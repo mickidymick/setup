@@ -20,21 +20,9 @@ cp .bashrc $HM/.bashrc
 
 mkdir -p ~/.yed
 
-# YED_INSTALLATION_PREFIX="${HM}/.local"
-C_FLAGS="-O3 -shared -fPIC -Wall -Werror"
+C_FLAGS="-O3"
 CC=gcc
-
-if [ -d /opt/yed ]; then # M1
-    YED_INSTALLATION_PREFIX="/opt/yed"
-    C_FLAGS="-arch arm64 ${C_FLAGS}"
-    CC=clang
-elif [ -f /usr/local/bin/yed ]; then # Older Mac
-    YED_INSTALLATION_PREFIX="/usr/local"
-else
-    YED_INSTALLATION_PREFIX="/usr" # Linux probably
-fi
-C_FLAGS+=" -I${YED_INSTALLATION_PREFIX}/include -L${YED_INSTALLATION_PREFIX}/lib -lyed"
-
+C_FLAGS+=" $(yed --print-cflags) $(yed --print-ldflags)"
 
 YED_DIR=${DIR}/.yed
 HOME_YED_DIR=${HM}/.yed
@@ -55,6 +43,16 @@ for p in ${pids[@]}; do
     wait $p || exit 1
 done
 
+echo "Moving Init."
+# cp ${YED_DIR}/init.so ${HOME_YED_DIR}
+
 echo "Moving yedrc."
 cp ${YED_DIR}/yedrc ${HOME_YED_DIR}
+
+echo "Moving ypm_list."
+cp ${YED_DIR}/ypm_list ${HOME_YED_DIR}
+
+echo "Moving templates."
+cp -r ${YED_DIR}/templates ${HOME_YED_DIR}
+
 echo "Done."

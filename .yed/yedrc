@@ -4,6 +4,8 @@
 ###############################################################################
 
 ### @plugins ###
+plugins-add-dir '~/.yed/ypm_build'
+plugin-load 'ypm'
 
 # 'yedrc' is already loaded by init.c
 # That's how we're loading this file.
@@ -22,7 +24,6 @@
 #    lazy-plug-ft ".glsl"  'lang/glsl'
 #    lazy-plug-ft ".si"    'lang/simon'
 
-# plugins-add-dir '~/.yed/plugins'
 
 # plugin-load 'lang/c'
 # plugin-load 'lang/cpp'
@@ -48,7 +49,8 @@
 # plugin-load 'ypm'
 
 ### Zach's Modified Plugins ###'
-# plugin-load 'builder'
+plugins-add-dir '~/.yed/plugins'
+plugin-load 'builder'
 
 # plugin-load 'vimish'
 # plugin-load 'brace_hl'
@@ -140,6 +142,7 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-# set builder-build-command 'gcc $(yed --print-cflags) $(yed --print-ldflags) -o ypm.so -g ypm.c'
-plugins-add-dir '~/.yed/ypm_build'
-plugin-load 'ypm'
+# set builder-build-command 'sudo ./build.sh'
+
+set builder-build-command './build.sh'
+plugin-load 'loc_history'
