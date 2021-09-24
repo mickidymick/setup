@@ -112,3 +112,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+#add .local/bin to path
+PATH=$HOME/.local/bin:$PATH
+

@@ -86,7 +86,10 @@ int yed_plugin_boot(yed_plugin *self) {
     }
 
     /* Load my yedrc file. */
-    YEXE("yedrc-load", "~/.yed/yedrc");
+    char *path;
+    path = get_config_item_path("yedrc");
+    YEXE("yedrc-load", path);
+    free(path);
 
     /* Load style via environment var if set. */
     if ((term = getenv("TERM"))
@@ -395,11 +398,11 @@ void kammerdienerb_go_menu(int n_args, char **args) {
     }
 
     /* add yedrc */
-    if(yed_get_buffer_by_path("~/.yed/yedrc") == NULL) {
+    if(yed_get_buffer_by_path("~/.config/yed/yedrc") == NULL) {
         if (row > 1) {
             yed_buffer_add_line_no_undo(buff);
         }
-        bname = "~/.yed/yedrc";
+        bname = "~/.config/yed/yedrc";
         for (i = 0; i < strlen(bname); i += 1) {
             yed_append_to_line_no_undo(buff, row, G(bname[i]));
         }

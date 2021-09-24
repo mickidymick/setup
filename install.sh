@@ -18,14 +18,14 @@ cp .bashrc $HM/.bashrc
 #mkdir -p $HM/.ssh
 #cp .ssh/config $HM/.ssh
 
-mkdir -p ~/.yed
+mkdir -p ~/.config/yed
 
 C_FLAGS="-O3"
 CC=gcc
 C_FLAGS+=" $(yed --print-cflags) $(yed --print-ldflags)"
 
 YED_DIR=${DIR}/.yed
-HOME_YED_DIR=${HM}/.yed
+HOME_YED_DIR=${HM}/.config/yed
 
 pids=()
 
@@ -44,7 +44,7 @@ for p in ${pids[@]}; do
 done
 
 echo "Moving Init."
-# cp ${YED_DIR}/init.so ${HOME_YED_DIR}
+ # cp ${YED_DIR}/init.so ${HOME_YED_DIR}
 
 echo "Moving yedrc."
 cp ${YED_DIR}/yedrc ${HOME_YED_DIR}
