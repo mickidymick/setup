@@ -44,3 +44,6 @@ lang/syntax/python
 lang/syntax/sh
 lang/syntax/yedrc
 lang/tools/latex
+builder
+loc_history
+fstyle
