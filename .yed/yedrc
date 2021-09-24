@@ -49,8 +49,8 @@ plugin-load 'ypm'
 # plugin-load 'ypm'
 
 ### Zach's Modified Plugins ###'
-plugins-add-dir '~/.yed/plugins'
-plugin-load 'builder'
+plugins-add-dir '~/.config/yed/plugins'
+# plugin-load 'builder'
 
 # plugin-load 'vimish'
 # plugin-load 'brace_hl'
@@ -145,4 +145,4 @@ yedrc-load ".yedrc"
 # set builder-build-command 'sudo ./build.sh'
 
 set builder-build-command './build.sh'
-plugin-load 'loc_history'
+# plugin-load 'loc_history'

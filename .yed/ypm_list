@@ -1,8 +1,3 @@
-lang/bjou
-lang/simon
-lang/slide
-mk_src_pair
-chatty_kathy
 add_template
 auto_paren
 find_bracket
@@ -39,7 +34,6 @@ style_pack
 vimish
 hook
 styles/first
-styles/mrjantz
 lang/syntax/c
 lang/syntax/conf
 lang/syntax/cpp
