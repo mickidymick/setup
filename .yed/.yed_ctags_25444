@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ARGS_GO_MENU_BUFF	init.c	15;"	d	file:
+ARGS_SCRATCH_BUFF	init.c	14;"	d	file:
+get_or_make_buffer	init.c	/^yed_buffer *get_or_make_buffer(char *name, int flags) {$/;"	f
+go_menu_stay	init.c	/^int go_menu_stay;$/;"	v
+kammerdienerb_find_cursor_word	init.c	/^void kammerdienerb_find_cursor_word(int n_args, char **args) {$/;"	f
+kammerdienerb_go_menu	init.c	/^void kammerdienerb_go_menu(int n_args, char **args) {$/;"	f
+kammerdienerb_go_menu_key_handler	init.c	/^void kammerdienerb_go_menu_key_handler(yed_event *event) {$/;"	f
+kammerdienerb_quit	init.c	/^void kammerdienerb_quit(int n_args, char **args) {$/;"	f
+kammerdienerb_special_buffer_prepare_focus	init.c	/^void kammerdienerb_special_buffer_prepare_focus(int n_args, char **args) {$/;"	f
+kammerdienerb_special_buffer_prepare_jump_focus	init.c	/^void kammerdienerb_special_buffer_prepare_jump_focus(int n_args, char **args) {$/;"	f
+kammerdienerb_special_buffer_prepare_unfocus	init.c	/^void kammerdienerb_special_buffer_prepare_unfocus(int n_args, char **args) {$/;"	f
+kammerdienerb_write_quit	init.c	/^void kammerdienerb_write_quit(int n_args, char **args) {$/;"	f
+reshow_buff_name	init.c	/^static char *reshow_buff_name;$/;"	v	file:
+stay_in_special_frame	init.c	/^static int   stay_in_special_frame;$/;"	v	file:
+yed_plugin_boot	init.c	/^int yed_plugin_boot(yed_plugin *self) {$/;"	f

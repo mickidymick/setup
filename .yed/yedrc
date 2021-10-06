@@ -93,6 +93,8 @@ set chatty-kathy-server             "com1635.eecs.utk.edu"
 set chatty-kathy-client-autoconnect "yes"
 set macro-instant-playback          "yes"
 set go-menu-force-split             "no"
+set builder-popup-rg                "yes"
+set formatter-auto                  "no"
 
 ### @style ###
 style first-dark
@@ -145,4 +147,5 @@ yedrc-load ".yedrc"
 # set builder-build-command 'sudo ./build.sh'
 
 set builder-build-command './build.sh'
-# plugin-load 'loc_history'
+plugins-add-dir '~/tmp_yed/loc_history'
+plugin-load 'loc_history'
