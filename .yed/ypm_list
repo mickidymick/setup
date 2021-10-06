@@ -1,5 +1,4 @@
 add_template
-auto_paren
 find_bracket
 man
 ctags
@@ -47,3 +46,7 @@ lang/tools/latex
 builder
 loc_history
 fstyle
+formatter
+auto_paren
+lang/go
+lang/syntax/go
