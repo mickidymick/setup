@@ -7,73 +7,9 @@
 plugins-add-dir '~/.yed/ypm_build'
 plugin-load 'ypm'
 
-# 'yedrc' is already loaded by init.c
-# That's how we're loading this file.
-
-# NOTE: these aren't working right now
-# plugin-load 'lazy_plug'
-# plugin-load 'run_on_ft'
-#    lazy-plug-ft ".c"     'lang/c'
-#    lazy-plug-ft ".cpp"   'lang/c'
-#    lazy-plug-ft ".sh"    'lang/sh'
-#    lazy-plug-ft ".bjou"  'lang/bjou'
-#    lazy-plug-ft ".tex"   'lang/latex'
-#    lazy-plug-ft ".py"    'lang/python'
-#    lazy-plug-ft ".yedrc" 'lang/yedrc'
-#    lazy-plug-ft ".jgr"   'lang/jgraph'
-#    lazy-plug-ft ".glsl"  'lang/glsl'
-#    lazy-plug-ft ".si"    'lang/simon'
-
-
-# plugin-load 'lang/c'
-# plugin-load 'lang/cpp'
-# plugin-load 'lang/sh'
-# plugin-load 'lang/bjou'
-# plugin-load 'lang/latex'
-# plugin-load 'lang/python'
-# plugin-load 'lang/yedrc'
-# plugin-load 'lang/jgraph'
-# plugin-load 'lang/glsl'
-# plugin-load 'lang/conf'
-# plugin-load 'lang/simon'
-# plugin-load 'lang/slide'
-# plugin-load 'line_numbers'
-# plugin-load 'calc'
-
-### Zach's Personal Plugins ###
-# plugin-load 'find_bracket'
-# plugins-add-dir '~/.yed/ypm/plugins'
-# plugin-load 'loc_history'
-# plugin-load 'auto_paren'
-# plugin-load 'add_template'
-# plugin-load 'ypm'
-
 ### Zach's Modified Plugins ###'
-plugins-add-dir '~/.config/yed/plugins'
+# plugins-add-dir '~/.config/yed/plugins'
 # plugin-load 'builder'
-
-# plugin-load 'vimish'
-# plugin-load 'brace_hl'
-# plugin-load 'paren_hl'
-# plugin-load 'log_hl'
-# plugin-load 'indent_c'
-# plugin-load 'comment'
-# plugin-load 'align'
-# plugin-load 'autotrim'
-# plugin-load 'completer'
-# plugin-load 'grep'
-# plugin-load 'find_file'
-# plugin-load 'man'
-# plugin-load 'style_use_term_bg'
-# plugin-load 'style_pack'
-# plugin-load 'styles/casey' # this will load my modified version
-# plugin-load 'mk_src_pair'
-# plugin-load 'ctags'
-# plugin-load 'hook'
-# plugin-load 'jump_stack'
-# plugin-load 'shell_run'
-# plugin-load 'macro'
-# plugin-load 'chatty_kathy'
 
 ### @variables ###
 set tab-width                       4
@@ -113,8 +49,6 @@ vimish-bind  normal  "ctrl-p"     buffer-prev
 vimish-bind  normal  "M M"        man-word
 vimish-bind  normal  "L L"        command-prompt "cursor-line "
 vimish-bind  normal  "ctrl-l"     frame-next
-# Don't really use this that much and would prefer to not see the warnings.
-# vimish-bind  normal  "ctrl-h"     frame-prev
 vimish-bind  normal  ">"          indent
 vimish-bind  normal  "<"          unindent
 vimish-bind  normal  "spc g"      grep
@@ -144,8 +78,6 @@ hook post-write                 \
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-# set builder-build-command 'sudo ./build.sh'
-
-set builder-build-command './build.sh'
-plugins-add-dir '~/tmp_yed/loc_history'
-plugin-load 'loc_history'
+# set builder-build-command './build.sh'
+# plugins-add-dir '~/tmp_yed/loc_history'
+# plugin-load 'loc_history'
