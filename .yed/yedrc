@@ -8,8 +8,7 @@ plugins-add-dir '~/.yed/ypm_build'
 plugin-load 'ypm'
 
 ### Zach's Modified Plugins ###'
-# plugins-add-dir '~/.config/yed/plugins'
-# plugin-load 'builder'
+plugins-add-dir '~/.config/yed/plugins'
 
 ### @variables ###
 set tab-width                       4
@@ -31,6 +30,13 @@ set macro-instant-playback          "yes"
 set go-menu-force-split             "no"
 set builder-popup-rg                "yes"
 set formatter-auto                  "no"
+set git-variables-branch-icon       " "
+
+### @bar ###
+set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
+set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T     %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
+set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %t "
+
 
 ### @style ###
 style first-dark
@@ -49,6 +55,8 @@ vimish-bind  normal  "ctrl-p"     buffer-prev
 vimish-bind  normal  "M M"        man-word
 vimish-bind  normal  "L L"        command-prompt "cursor-line "
 vimish-bind  normal  "ctrl-l"     frame-next
+# Don't really use this that much and would prefer to not see the warnings.
+# vimish-bind  normal  "ctrl-h"     frame-prev
 vimish-bind  normal  ">"          indent
 vimish-bind  normal  "<"          unindent
 vimish-bind  normal  "spc g"      grep
@@ -79,5 +87,6 @@ hook post-write                 \
 yedrc-load ".yedrc"
 
 # set builder-build-command './build.sh'
-# plugins-add-dir '~/tmp_yed/loc_history'
-# plugin-load 'loc_history'
+# plugins-add-dir '~/tmp_yed/zulu'
+# plugin-load 'zulu'
+# style zulu

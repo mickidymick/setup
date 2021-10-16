@@ -50,3 +50,6 @@ formatter
 auto_paren
 lang/go
 lang/syntax/go
+zulu
+git_variables
+styles/zulu
