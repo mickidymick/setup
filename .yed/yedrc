@@ -31,6 +31,7 @@ set go-menu-force-split             "no"
 set builder-popup-rg                "yes"
 set formatter-auto                  "no"
 set git-variables-branch-icon       " "
+set go-menu-persistent-items        "~/.config/yed/yedrc"
 
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
@@ -39,7 +40,7 @@ set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :
 
 
 ### @style ###
-style first-dark
+style zulu
 
 ### @keybindings ###
 vimish-bind  normal  "ctrl-c ctrl-c"    comment-toggle

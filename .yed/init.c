@@ -12,7 +12,9 @@ void kammerdienerb_find_cursor_word(int n_args, char **args);
 int go_menu_stay;
 
 #define ARGS_SCRATCH_BUFF "*scratch", (BUFF_SPECIAL)
-#define ARGS_GO_MENU_BUFF "*go-menu", (BUFF_SPECIAL | BUFF_RD_ONLY)
+
+
+//#define ARGS_GO_MENU_BUFF "*go-menu", (BUFF_SPECIAL | BUFF_RD_ONLY)
 
 yed_buffer *get_or_make_buffer(char *name, int flags) {
     yed_buffer *buff;
@@ -49,13 +51,13 @@ int yed_plugin_boot(yed_plugin *self) {
     yed_log("\ninit.c: added overrides for 'special-buffer-prepare-*' commands");
 
     get_or_make_buffer(ARGS_SCRATCH_BUFF);
-    get_or_make_buffer(ARGS_GO_MENU_BUFF);
+/*     get_or_make_buffer(ARGS_GO_MENU_BUFF); */
 
-    go_menu_key.kind = EVENT_KEY_PRESSED;
-    go_menu_key.fn   = kammerdienerb_go_menu_key_handler;
-    yed_plugin_add_event_handler(self, go_menu_key);
+/*     go_menu_key.kind = EVENT_KEY_PRESSED; */
+/*     go_menu_key.fn   = kammerdienerb_go_menu_key_handler; */
+/*     yed_plugin_add_event_handler(self, go_menu_key); */
 
-    yed_plugin_set_command(self, "go-menu", kammerdienerb_go_menu);
+/*     yed_plugin_set_command(self, "go-menu", kammerdienerb_go_menu); */
     yed_plugin_set_command(self, "kammerdienerb-find-cursor-word", kammerdienerb_find_cursor_word);
 
     YEXE("plugin-load", "yedrc");
@@ -110,7 +112,6 @@ int yed_plugin_boot(yed_plugin *self) {
     LOG_EXIT();
     return 0;
 }
-
 
 /*
 ** Here's how I want this to behave (assuming a left/right split frame):
@@ -374,6 +375,7 @@ void kammerdienerb_write_quit(int n_args, char **args) {
     YEXE("q");
 }
 
+/*
 void kammerdienerb_go_menu(int n_args, char **args) {
     yed_buffer                                   *buff;
     tree_it(yed_buffer_name_t, yed_buffer_ptr_t)  bit;
@@ -398,6 +400,7 @@ void kammerdienerb_go_menu(int n_args, char **args) {
     }
 
     /* add yedrc */
+    /*
     if(yed_get_buffer_by_path("~/.config/yed/yedrc") == NULL) {
         if (row > 1) {
             yed_buffer_add_line_no_undo(buff);
@@ -444,7 +447,7 @@ void kammerdienerb_go_menu_key_handler(yed_event *event) {
 
     }
 }
-
+*/
 void kammerdienerb_find_cursor_word(int n_args, char **args) {
     char *word;
 
