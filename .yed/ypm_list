@@ -53,3 +53,8 @@ lang/syntax/go
 zulu
 git_variables
 styles/zulu
+go_menu
+confirm-quit
+convert
+universal_clipboard
+style_picker

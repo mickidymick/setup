@@ -1,5 +1,6 @@
 #include <yed/plugin.h>
 
+void zach_remove_all_frames_but_first(int n_args, char **args);
 void kammerdienerb_special_buffer_prepare_focus(int n_args, char **args);
 void kammerdienerb_special_buffer_prepare_jump_focus(int n_args, char **args);
 void kammerdienerb_special_buffer_prepare_unfocus(int n_args, char **args);
@@ -44,6 +45,7 @@ int yed_plugin_boot(yed_plugin *self) {
     yed_log("\n# **  This is Zach McMichael's yed configuration  **");
     yed_log("\n# ********************************************************");
 
+    yed_plugin_set_command(self, "remove-all-frames-but-first",       zach_remove_all_frames_but_first);
     yed_plugin_set_command(self, "special-buffer-prepare-focus",      kammerdienerb_special_buffer_prepare_focus);
     yed_plugin_set_command(self, "special-buffer-prepare-jump-focus", kammerdienerb_special_buffer_prepare_jump_focus);
     yed_plugin_set_command(self, "special-buffer-prepare-unfocus",    kammerdienerb_special_buffer_prepare_unfocus);
@@ -375,79 +377,6 @@ void kammerdienerb_write_quit(int n_args, char **args) {
     YEXE("q");
 }
 
-/*
-void kammerdienerb_go_menu(int n_args, char **args) {
-    yed_buffer                                   *buff;
-    tree_it(yed_buffer_name_t, yed_buffer_ptr_t)  bit;
-    int                                           row;
-    int                                           i;
-    char                                         *bname;
-
-    buff = get_or_make_buffer(ARGS_GO_MENU_BUFF);
-    buff->flags &= ~BUFF_RD_ONLY;
-    yed_buff_clear_no_undo(buff);
-
-    row = 1;
-    tree_traverse(ys->buffers, bit) {
-        if (row > 1) {
-            yed_buffer_add_line_no_undo(buff);
-        }
-        bname = tree_it_key(bit);
-        for (i = 0; i < strlen(bname); i += 1) {
-            yed_append_to_line_no_undo(buff, row, G(bname[i]));
-        }
-        row += 1;
-    }
-
-    /* add yedrc */
-    /*
-    if(yed_get_buffer_by_path("~/.config/yed/yedrc") == NULL) {
-        if (row > 1) {
-            yed_buffer_add_line_no_undo(buff);
-        }
-        bname = "~/.config/yed/yedrc";
-        for (i = 0; i < strlen(bname); i += 1) {
-            yed_append_to_line_no_undo(buff, row, G(bname[i]));
-        }
-    }
-    row += 1;
-    buff->flags |= BUFF_RD_ONLY;
-
-    YEXE("special-buffer-prepare-focus", "*go-menu");
-    if (ys->active_frame) {
-        YEXE("buffer", "*go-menu");
-    }
-}
-
-void kammerdienerb_go_menu_key_handler(yed_event *event) {
-    yed_buffer *buff;
-    yed_line   *line;
-    char       *bname;
-
-    buff = get_or_make_buffer(ARGS_GO_MENU_BUFF);
-
-    if ((event->key != ENTER && event->key != CTRL_C)
-    ||  ys->interactive_command
-    ||  !ys->active_frame
-    ||  ys->active_frame->buffer != buff) {
-        return;
-    }
-
-    event->cancel = 1;
-
-    if (event->key == ENTER) {
-        line = yed_buff_get_line(buff, ys->active_frame->cursor_line);
-        array_zero_term(line->chars);
-        bname = array_data(line->chars);
-        go_menu_stay = bname[0] == '*';
-        YEXE("special-buffer-prepare-jump-focus", "*go-menu");
-        YEXE("buffer", bname);
-    } else {
-        YEXE("special-buffer-prepare-unfocus", "*go-menu");
-
-    }
-}
-*/
 void kammerdienerb_find_cursor_word(int n_args, char **args) {
     char *word;
 
@@ -473,4 +402,13 @@ void kammerdienerb_find_cursor_word(int n_args, char **args) {
     YEXE("find-prev-in-buffer");
 
     free(word);
+}
+
+void zach_remove_all_frames_but_first(int n_args, char **args) {
+    yed_frame** fp;
+
+    while(array_len(ys->frames) > 1) {
+        fp = array_last(ys->frames);
+        yed_delete_frame(*fp);
+    }
 }

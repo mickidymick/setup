@@ -3,6 +3,10 @@
 #     Zach McMichael
 ###############################################################################
 
+plugin-load 'profile'
+#starts the profile timing
+profile-start
+
 ### @plugins ###
 plugins-add-dir '~/.yed/ypm_build'
 plugin-load 'ypm'
@@ -75,6 +79,8 @@ vimish-bind  normal  "ctrl-t"     set-template "for.txt"
 vimish-bind  normal  "%"          brace-goto-other
 vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert
+vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
+vimish-bind  normal  "R R"        remove-all-frames-but-first
 
 ### @hooks ###
 hook post-write                 \
@@ -91,3 +97,7 @@ yedrc-load ".yedrc"
 # plugins-add-dir '~/tmp_yed/zulu'
 # plugin-load 'zulu'
 # style zulu
+set builder-build-command 'python3 srp.py'
+
+#ends the profile timing
+profile-end
