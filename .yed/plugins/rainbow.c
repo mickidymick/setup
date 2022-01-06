@@ -157,6 +157,4 @@ void change_color(yed_event *event) {
     s->code_constant.fg        = ((rand() % 255) | ((rand() % 255) << 8) | ((rand() % 255) << 16));
     s->code_string.fg          = ((rand() % 255) | ((rand() % 255) << 8) | ((rand() % 255) << 16));
     s->code_character.fg       = ((rand() % 255) | ((rand() % 255) << 8) | ((rand() % 255) << 16));
-
-    ys->redraw = 1;
 }

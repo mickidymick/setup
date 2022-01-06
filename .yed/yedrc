@@ -36,11 +36,32 @@ set builder-popup-rg                "yes"
 set formatter-auto                  "no"
 set git-variables-branch-icon       " "
 set go-menu-persistent-items        "~/.config/yed/yedrc"
+set ctags-additional-paths          "~/yed/src/*"
 
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
 set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T     %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
 set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %t "
+
+### @Mouse ###
+set mouse-cursor-scroll yes
+set mouse-scroll-num-lines "3"
+set "mouse-menu-on-word"      "Paste paste-yank-buffer                                                                            \
+                              'Jump to Definition' 'multi jump-stack-push ctags-jump-to-definition'                               \
+                               Manpage 'man-word'                                                                                 \
+                               Convert convert-number"
+
+set "mouse-menu-on-selection" "Copy yank-selection                    \
+                               Clipboard copy-to-universal-clipboard  \
+                               Delete delete-back"
+
+set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"special-buffer-prepare-unfocus *builder-output\"' \
+                              'Frame New' frame-new                                                                               \
+                              'Frame Delete' frame-delete                                                                         \
+                               Return jump-stack-pop                                                                              \
+                               Reload reload                                                                                      \
+                               Quit qa                                                                                            \
+                               'Save and Quit' wq"
 
 
 ### @style ###
@@ -82,22 +103,19 @@ vimish-bind  insert  "j j"        vimish-exit-insert
 vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
 
-### @hooks ###
-hook post-write                 \
-    if use-ctags                \
-        'multi                  \
-            "ctags-gen"         \
-            "ctags-hl-reparse"'
-
 ### @project ###
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-# set builder-build-command './build.sh'
-# plugins-add-dir '~/tmp_yed/zulu'
-# plugin-load 'zulu'
-# style zulu
-set builder-build-command 'python3 srp.py'
+plugins-add-dir "~/tmp_yed/mouse"
+plugins-add-dir "~/tmp_yed/mouse_menu"
+plugins-add-dir "~/tmp_yed/mouse_frame_control"
+plugins-add-dir "~/tmp_yed/convert"
+plugin-load "mouse"
+plugin-load "mouse_menu"
+plugin-load "mouse_frame_control"
+plugin-load "convert"
+set builder-build-command "./build.sh"
 
 #ends the profile timing
 profile-end
