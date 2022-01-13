@@ -40,8 +40,8 @@ set ctags-additional-paths          "~/yed/src/*"
 
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
-set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T     %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
-set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %t "
+set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T        %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
+set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %F "
 
 ### @Mouse ###
 set mouse-cursor-scroll yes
@@ -60,6 +60,8 @@ set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"
                               'Frame Delete' frame-delete                                                                         \
                                Return jump-stack-pop                                                                              \
                                Reload reload                                                                                      \
+                               H-Split frame-hsplit                                                                               \
+                               V-Split frame-vsplit                                                                               \
                                Quit qa                                                                                            \
                                'Save and Quit' wq"
 
@@ -107,14 +109,8 @@ vimish-bind  normal  "R R"        remove-all-frames-but-first
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
 
-plugins-add-dir "~/tmp_yed/mouse"
-plugins-add-dir "~/tmp_yed/mouse_menu"
 plugins-add-dir "~/tmp_yed/mouse_frame_control"
-plugins-add-dir "~/tmp_yed/convert"
-plugin-load "mouse"
-plugin-load "mouse_menu"
 plugin-load "mouse_frame_control"
-plugin-load "convert"
 set builder-build-command "./build.sh"
 
 #ends the profile timing

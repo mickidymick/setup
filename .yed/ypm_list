@@ -58,3 +58,6 @@ confirm-quit
 convert
 universal_clipboard
 style_picker
+mouse
+mouse_menu
+make-tab
