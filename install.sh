@@ -8,6 +8,9 @@ eval HM=$(echo ~${USER})
 
 echo ".bashrc"
 cp .bashrc $HM/.bashrc
+mkdir -p $HM/.config/kitty
+echo ".config/kitty/kitty.conf"
+cp kitty.conf $HM/.config/kitty/kitty.conf
 #echo ".vimrc"
 #cp .vimrc $HM/.vimrc
 #echo ".vim/"
