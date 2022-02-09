@@ -106,12 +106,10 @@ vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
 
 ### @project ###
+set builder-build-command "./build.sh"
+
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
-
-plugins-add-dir "~/tmp_yed/mouse_frame_control"
-plugin-load "mouse_frame_control"
-set builder-build-command "./build.sh"
 
 #ends the profile timing
 profile-end
