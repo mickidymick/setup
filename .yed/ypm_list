@@ -42,6 +42,7 @@ lang/syntax/latex
 lang/syntax/python
 lang/syntax/sh
 lang/syntax/yedrc
+lang/syntax/make
 lang/tools/latex
 builder
 loc_history

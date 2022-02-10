@@ -1,9 +1,10 @@
-//:%s/lab/new_nam/g
 all: lab
 
 clean:
-    rm -f lab
+	rm -f lab
 
 lab: lab.cpp
-    g++ -Wall -std=c++17 -g -O0 -o lab lab.cpp
+	g++ -Wall -std=c++17 -g -O0 -o lab lab.cpp
 
+lab: lab.c
+	gcc -Wall -g -O0 -o lab lab.c
