@@ -47,7 +47,6 @@ lang/tools/latex
 builder
 loc_history
 fstyle
-formatter
 auto_paren
 lang/go
 lang/syntax/go
@@ -62,3 +61,7 @@ style_picker
 mouse
 mouse_menu
 make-tab
+formatter
+lang/syntax/make
+mouse_frame_control
+yule_2021

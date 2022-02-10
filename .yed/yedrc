@@ -90,7 +90,7 @@ vimish-bind  normal  "<"          unindent
 vimish-bind  normal  "spc g"      grep
 vimish-bind  normal  "spc f"      find-file
 vimish-bind  normal  "spc a l"    command-prompt "align "
-vimish-bind  normal  "ctrl-y"     multi "builder-start" "builder-view-output" "special-buffer-prepare-unfocus *builder-output"
+vimish-bind  normal  "ctrl-y"     multi "builder-view-output" "builder-start" "special-buffer-prepare-unfocus *builder-output"
 vimish-bind  normal  "E E"        builder-jump-to-error
 vimish-bind  normal  "spc t"      ctags-find
 vimish-bind  normal  "T T"        multi jump-stack-push ctags-jump-to-definition
@@ -106,12 +106,10 @@ vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
 
 ### @project ###
+set builder-build-command "./build.sh"
+
 # Load directory-specific rc file.
 yedrc-load ".yedrc"
-
-plugins-add-dir "~/tmp_yed/mouse_frame_control"
-plugin-load "mouse_frame_control"
-set builder-build-command "./build.sh"
 
 #ends the profile timing
 profile-end

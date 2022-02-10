@@ -2,6 +2,7 @@
  * Author: Zach McMichael
  * Description:
  */
+
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -16,6 +17,5 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 
-        exit(0);
+    exit(0);
 }
-
