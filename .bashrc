@@ -56,8 +56,27 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+function __prompt_command {
+    local EXIT="$?"
+    PS1=""
+
+    local WHITE='\[\033[00m\]'
+    local RED='\[\033[1;31m\]'
+    local GREEN='\[\033[1;32m\]'
+    local BLUE='\[\033[1;34m\]'
+
+    if [ $EXIT != 0 ]; then
+        PS1+="${debian_chroot:+($debian_chroot)}${RED}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
+    else
+        PS1+="${debian_chroot:+($debian_chroot)}${GREEN}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
+    fi
+    export PS1
+}
+
+export PROMPT_COMMAND=__prompt_command
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1="${debian_chroot:+($debian_chroot)}${GREEN}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -71,6 +90,9 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
+#change the propt to gree if pass and red if fail
+# RPS1='%B%(?.%F{green}.%F{red})%?%f%b'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
