@@ -37,6 +37,7 @@ set formatter-auto                  "no"
 set git-variables-branch-icon       " "
 set go-menu-persistent-items        "~/.config/yed/yedrc"
 set ctags-additional-paths          "~/yed/src/*"
+set diff-hl-on                      "yes"
 
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
