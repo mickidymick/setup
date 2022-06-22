@@ -109,8 +109,10 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+# alias ll='ls -la'
+alias ll='~/setup/new_ls.sh'
+
 # some more ls aliases
-alias ll='ls -la'
 alias fuck='sudo $(history -p !!)'
 #alias la='ls -A'
 #alias l='ls -CF'
