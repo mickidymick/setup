@@ -6,16 +6,11 @@ void kammerdienerb_special_buffer_prepare_jump_focus(int n_args, char **args);
 void kammerdienerb_special_buffer_prepare_unfocus(int n_args, char **args);
 void kammerdienerb_quit(int n_args, char **args);
 void kammerdienerb_write_quit(int n_args, char **args);
-void kammerdienerb_go_menu(int n_args, char **args);
-void kammerdienerb_go_menu_key_handler(yed_event *event);
 void kammerdienerb_find_cursor_word(int n_args, char **args);
 
 int go_menu_stay;
 
 #define ARGS_SCRATCH_BUFF "*scratch", (BUFF_SPECIAL)
-
-
-//#define ARGS_GO_MENU_BUFF "*go-menu", (BUFF_SPECIAL | BUFF_RD_ONLY)
 
 yed_buffer *get_or_make_buffer(char *name, int flags) {
     yed_buffer *buff;
@@ -46,21 +41,15 @@ int yed_plugin_boot(yed_plugin *self) {
     yed_log("\n# ********************************************************");
 
     yed_plugin_set_command(self, "remove-all-frames-but-first",       zach_remove_all_frames_but_first);
-    yed_plugin_set_command(self, "special-buffer-prepare-focus",      kammerdienerb_special_buffer_prepare_focus);
-    yed_plugin_set_command(self, "special-buffer-prepare-jump-focus", kammerdienerb_special_buffer_prepare_jump_focus);
-    yed_plugin_set_command(self, "special-buffer-prepare-unfocus",    kammerdienerb_special_buffer_prepare_unfocus);
+/*     yed_plugin_set_command(self, "special-buffer-prepare-focus",      kammerdienerb_special_buffer_prepare_focus); */
+/*     yed_plugin_set_command(self, "special-buffer-prepare-jump-focus", kammerdienerb_special_buffer_prepare_jump_focus); */
+/*     yed_plugin_set_command(self, "special-buffer-prepare-unfocus",    kammerdienerb_special_buffer_prepare_unfocus); */
     yed_plugin_set_command(self, "qa",                                yed_default_command_quit);
     yed_plugin_set_command(self, "wq",                                kammerdienerb_write_quit);
     yed_log("\ninit.c: added overrides for 'special-buffer-prepare-*' commands");
 
     get_or_make_buffer(ARGS_SCRATCH_BUFF);
-/*     get_or_make_buffer(ARGS_GO_MENU_BUFF); */
 
-/*     go_menu_key.kind = EVENT_KEY_PRESSED; */
-/*     go_menu_key.fn   = kammerdienerb_go_menu_key_handler; */
-/*     yed_plugin_add_event_handler(self, go_menu_key); */
-
-/*     yed_plugin_set_command(self, "go-menu", kammerdienerb_go_menu); */
     yed_plugin_set_command(self, "kammerdienerb-find-cursor-word", kammerdienerb_find_cursor_word);
 
     YEXE("plugin-load", "yedrc");

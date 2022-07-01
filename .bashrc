@@ -113,6 +113,7 @@ fi
 alias ll='~/setup/new_ls.sh'
 
 # some more ls aliases
+alias fix='reset'
 alias fuck='sudo $(history -p !!)'
 #alias la='ls -A'
 #alias l='ls -CF'
