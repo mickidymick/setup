@@ -40,9 +40,9 @@ set ctags-additional-paths          "~/yed/src/*"
 set diff-hl-on                      "yes"
 
 ### @bar ###
-set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3]%[]"
+set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3 bg F0428B]%[bg F0428B] add_frame_name %[fg F0428B]%[]"
 set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T        %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
-set status-line-right               "%[fg 9D57B3]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %F "
+set status-line-right               "%[fg F0428B]%[bg F0428B] %(builder-status) %[fg 9D57B3 bg F0428B]%[]%[bg 9D57B3] (%p%%)  %l :: %c    %[fg 3DBAAA bg 9D57B3]%[]%[bg 3DBAAA] %F "
 
 ### @Mouse ###
 set mouse-cursor-scroll yes
