@@ -55,6 +55,7 @@ git_variables
 styles/zulu
 go_menu
 confirm-quit
+custom_frames
 convert
 universal_clipboard
 style_picker

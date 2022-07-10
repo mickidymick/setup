@@ -66,6 +66,10 @@ set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"
                                Quit qa                                                                                            \
                                'Save and Quit' wq"
 
+set-custom-buffer-frame    "ypm-menu"  "f" 1  0.15 0.15 0.70 0.70    0            "*ypm-menu *calc"
+set-custom-buffer-frame    "per-right" "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
+set-custom-buffer-frame    "tmp-right" "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
+set-custom-buffer-frame    "tray"      "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
 
 ### @style ###
 style zulu
