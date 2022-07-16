@@ -47,9 +47,6 @@ for p in ${pids[@]}; do
     wait $p || exit 1
 done
 
-echo "Moving Init."
- # cp ${YED_DIR}/init.so ${HOME_YED_DIR}
-
 echo "Moving yedrc."
 cp ${YED_DIR}/yedrc ${HOME_YED_DIR}
 
