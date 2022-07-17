@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 clear
-unbuffer ls -Ahos --color=auto | awk                              \
+unbuffer ls -Ahos --color=auto $@ | awk                              \
                 'BEGIN {
                     first_len   = 0;
                     second_len  = 0;
