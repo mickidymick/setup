@@ -67,3 +67,6 @@ lang/syntax/make
 mouse_frame_control
 yule_2021
 lang/syntax/diff_hl
+tree_view
+save_layout
+terminal
