@@ -66,13 +66,14 @@ function __prompt_command {
     local BLUE='\[\033[1;34m\]'
 
     if [ $EXIT != 0 ]; then
-        PS1+="${debian_chroot:+($debian_chroot)}${RED}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
+        PS1+="${PS1_PRE}${debian_chroot:+($debian_chroot)}${RED}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
     else
-        PS1+="${debian_chroot:+($debian_chroot)}${GREEN}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
+        PS1+="${PS1_PRE}${debian_chroot:+($debian_chroot)}${GREEN}\u@\h${WHITE}:${BLUE}\w${WHITE}\$ "
     fi
     export PS1
 }
 
+export PS1_PRE=''
 export PROMPT_COMMAND=__prompt_command
 
 if [ "$color_prompt" = yes ]; then
