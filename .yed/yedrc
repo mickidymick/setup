@@ -11,8 +11,12 @@ profile-start
 plugins-add-dir '~/.yed/ypm_build'
 plugin-load 'ypm'
 
+set lang-bpftrace-extensions 'bt'
+
 ### Zach's Modified Plugins ###'
 plugins-add-dir '~/.config/yed/plugins'
+plugin-load     'lang-bpftrace'
+plugin-load     'lang-syntax-bpftrace'
 
 ### @variables ###
 set tab-width                       4
