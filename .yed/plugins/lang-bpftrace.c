@@ -79,9 +79,7 @@ void maybe_change_ft(yed_buffer *buff) {
         return;
     }
 
-    yed_log("len%d\n", array_len(extra_extensions));
     array_traverse(extra_extensions, extension) {
-        yed_log("%s %s\n", ext, extension);
         if (strcmp(ext, (*extension)) == 0) {
             yed_buffer_set_ft(buff, yed_get_ft("BPF"));
             break;
