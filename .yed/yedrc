@@ -70,10 +70,12 @@ set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"
                                Quit qa                                                                                            \
                                'Save and Quit' wq"
 
-set-custom-buffer-frame    "ypm-menu"  "f" 1  0.15 0.15 0.70 0.70    0            "*ypm-menu *calc"
-set-custom-buffer-frame    "per-right" "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
-set-custom-buffer-frame    "tmp-right" "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
-set-custom-buffer-frame    "tray"      "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
+set-custom-buffer-frame    "tmp-center" "f" 1  0.15 0.15 0.70 0.70    0            "*bindings *calc *ctags-find-list *ypm-menu *grep-list *find-file-list"
+set-custom-buffer-frame    "man"        "f" 0  0.15 0.15 0.70 0.70    0            "*man-page"
+set-custom-buffer-frame    "log"        "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
+set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 ""
+set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
+set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
 
 ### @style ###
 style zulu
@@ -113,6 +115,7 @@ vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert
 vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
+vimish-bind  normal  "ctrl-r"     frame-delete
 
 ### @project ###
 set builder-build-command "./build.sh"

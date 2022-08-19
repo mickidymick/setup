@@ -70,3 +70,10 @@ lang/syntax/diff_hl
 tree_view
 save_layout
 terminal
+extension_mapper
+lang/javascript
+lang/linker
+lang/syntax/bpftrace
+lang/syntax/javascript
+lang/syntax/linker
+lang/bpftrace
