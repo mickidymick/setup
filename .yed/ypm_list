@@ -28,7 +28,6 @@ find_file
 log_hl
 indent_c
 autotrim
-line_numbers
 style_pack
 vimish
 hook
@@ -47,7 +46,6 @@ lang/tools/latex
 builder
 loc_history
 fstyle
-auto_paren
 lang/go
 lang/syntax/go
 zulu
@@ -67,8 +65,6 @@ lang/syntax/make
 mouse_frame_control
 yule_2021
 lang/syntax/diff_hl
-tree_view
-save_layout
 terminal
 extension_mapper
 lang/javascript
@@ -77,3 +73,9 @@ lang/syntax/bpftrace
 lang/syntax/javascript
 lang/syntax/linker
 lang/bpftrace
+command-history
+cursor_word_hl
+tree_view
+auto_paren
+save_layout
+line_numbers
