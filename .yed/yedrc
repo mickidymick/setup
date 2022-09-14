@@ -43,6 +43,14 @@ set go-menu-persistent-items        "~/.config/yed/yedrc"
 set ctags-additional-paths          "~/yed/src/*"
 set diff-hl-on                      "yes"
 
+### @bookmarks ###
+set bookmark-character ""
+set bookmark-color "fg 3333FF"
+set bookmarks-file "local.bookmarks"
+vimish-bind normal "ctrl-]" goto-next-bookmark-in-buffer
+vimish-bind normal "ctrl-o" goto-next-bookmark
+vimish-bind normal "ctrl-p" goto-prev-bookmark
+
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3 bg F0428B]%[bg F0428B] %n %[fg F0428B]%[]"
 set status-line-center              "%[fg ED8E29]%[bg ED8E29]     %[]%[bg ED8E29]%T        %(vimish-mode)%[fg ED8E29 bg ED8E29]    %[]%[fg ED8E29]%[]"
@@ -75,7 +83,7 @@ set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"
                                'Save and Quit' wq"
 
 set-custom-buffer-frame    "tmp-center" "f" 1  0.15 0.15 0.70 0.70    0            "*bindings *calc *ctags-find-list *ypm-menu *grep-list *find-file-list"
-set-custom-buffer-frame    "man"        "f" 0  0.15 0.15 0.70 0.70    0            "*man-page"
+set-custom-buffer-frame    "man"        "f" 1  0.15 0.15 0.70 0.70    0            "*man-page"
 set-custom-buffer-frame    "log"        "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
 set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 ""
 set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"

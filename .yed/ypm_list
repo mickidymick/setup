@@ -58,7 +58,6 @@ convert
 universal_clipboard
 style_picker
 mouse
-mouse_menu
 make-tab
 formatter
 lang/syntax/make
@@ -69,7 +68,6 @@ terminal
 extension_mapper
 lang/javascript
 lang/linker
-lang/syntax/bpftrace
 lang/syntax/javascript
 lang/syntax/linker
 lang/bpftrace
@@ -79,3 +77,5 @@ tree_view
 auto_paren
 save_layout
 line_numbers
+mouse_menu
+bookmarks
