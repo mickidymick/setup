@@ -59,7 +59,6 @@ universal_clipboard
 style_picker
 mouse
 make-tab
-formatter
 lang/syntax/make
 mouse_frame_control
 yule_2021
@@ -78,3 +77,14 @@ auto_paren
 save_layout
 line_numbers
 mouse_menu
+lang/csharp
+lang/rust
+lang/jule
+lang/scheme
+lang/syntax/csharp
+lang/syntax/bpftrace
+lang/syntax/jule
+lang/syntax/rust
+lang/syntax/scheme
+profile
+yule_2022
