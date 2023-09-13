@@ -139,6 +139,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+alias yeddiff='yed -c "diff $1 $2"'
+
 #add .local/bin to path
 PATH=$HOME/.local/bin:$PATH
 PATH=/usr/local/bin/qemu-system-riscv64:$PATH
