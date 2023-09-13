@@ -139,7 +139,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias yeddiff='yed -c "diff $1 $2"'
+function yeddiff {
+    yed -c "diff $1 $2";
+}
 
 #add .local/bin to path
 PATH=$HOME/.local/bin:$PATH
