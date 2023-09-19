@@ -88,7 +88,7 @@ set-custom-buffer-frame    "man"        "f" 1  0.15 0.15 0.70 0.70    0         
 set-custom-buffer-frame    "log"        "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
 set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  0 0            "*term0"
 set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
-set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
+# set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
 
 ### @style ###
 style zulu
@@ -114,7 +114,8 @@ vimish-bind  normal  "<"          unindent
 vimish-bind  normal  "spc g"      grep
 vimish-bind  normal  "spc f"      find-file
 vimish-bind  normal  "spc a l"    command-prompt "align "
-vimish-bind  normal  "ctrl-y"     multi "builder-view-output" "builder-start" "special-buffer-prepare-unfocus *builder-output"
+vimish-bind  normal  "ctrl-y"     builder-start
+# vimish-bind  normal  "ctrl-y"     multi "builder-view-output" "builder-start" "special-buffer-prepare-unfocus *builder-output"
 vimish-bind  normal  "E E"        builder-jump-to-error
 vimish-bind  normal  "spc t"      ctags-find
 vimish-bind  normal  "T T"        multi jump-stack-push ctags-jump-to-definition
