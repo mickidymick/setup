@@ -63,7 +63,8 @@ set mouse-scroll-num-lines "3"
 set "mouse-menu-on-word"      "Paste paste-yank-buffer                                                                            \
                               'Jump to Definition' 'multi jump-stack-push ctags-jump-to-definition'                               \
                                Manpage 'man-word'                                                                                 \
-                               Convert convert-number"
+                               Convert convert-number                                                                             \
+                               'LSP Info' lsp-info"
 
 set "mouse-menu-on-selection" "Copy yank-selection                    \
                                Clipboard copy-to-universal-clipboard  \
@@ -89,6 +90,11 @@ set-custom-buffer-frame    "log"        "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  1
 set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  0 0            "*term0"
 set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
 # set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
+
+### @LSP Servers ###
+lsp-define-server CCLS    ccls                       C C++
+lsp-define-server PYLSP   pylsp                      Python
+lsp-define-server BASHLSP "bash-language-server start" Shell
 
 ### @style ###
 style zulu
