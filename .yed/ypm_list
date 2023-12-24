@@ -72,10 +72,8 @@ lang/syntax/linker
 lang/bpftrace
 command-history
 cursor_word_hl
-tree_view
 auto_paren
 save_layout
-line_numbers
 mouse_menu
 lang/csharp
 lang/rust
@@ -88,3 +86,9 @@ lang/syntax/rust
 lang/syntax/scheme
 profile
 yule_2022
+lsp
+lsp_diagnostics
+lsp_info_popup
+tree_view
+diff
+bookmarks

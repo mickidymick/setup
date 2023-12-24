@@ -43,6 +43,7 @@ set git-variables-branch-icon       " "
 set go-menu-persistent-items        "~/.config/yed/yedrc"
 set ctags-additional-paths          "~/yed/src/*"
 set diff-hl-on                      "yes"
+set bookmark-use-line-numbers       "1"
 
 ### @bookmarks ###
 set bookmark-character ""
@@ -121,6 +122,7 @@ vimish-bind  normal  "spc g"      grep
 vimish-bind  normal  "spc f"      find-file
 vimish-bind  normal  "spc a l"    command-prompt "align "
 vimish-bind  normal  "ctrl-y"     builder-start
+vimish-bind  normal  "ctrl-u"     multi "buffer *lsp-diagnostics" "feed-keys enter"
 # vimish-bind  normal  "ctrl-y"     multi "builder-view-output" "builder-start" "special-buffer-prepare-unfocus *builder-output"
 vimish-bind  normal  "E E"        builder-jump-to-error
 vimish-bind  normal  "spc t"      ctags-find
@@ -135,6 +137,8 @@ vimish-bind  insert  "q q"        cursor-right
 vimish-bind  insert  "j j"        vimish-exit-insert
 vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
+vimish-bind  normal  "+"          diff-expand-truncated-lines
+vimish-bind  normal  "-"          diff-contract-truncated-lines
 # vimish-bind  normal  "ctrl-r"     frame-delete
 
 ### @project ###
