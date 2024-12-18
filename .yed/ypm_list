@@ -90,5 +90,6 @@ lsp
 lsp_diagnostics
 lsp_info_popup
 tree_view
+line_numbers
+lsp_symbol_buffer
 diff
-bookmarks
