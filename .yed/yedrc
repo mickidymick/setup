@@ -43,16 +43,20 @@ set git-variables-branch-icon       " "
 set go-menu-persistent-items        "~/.config/yed/yedrc"
 set ctags-additional-paths          "~/yed/src/*"
 set diff-hl-on                      "yes"
-set bookmark-use-line-numbers       "1"
 set grep-prg                        "grep --exclude-dir '.ccls-cache' --exclude-dir '.git' --exclude 'tags' -RHnIs '%' ."
 
 ### @bookmarks ###
-set bookmark-character ""
-set bookmark-color "fg 3333FF"
-set bookmarks-file "local.bookmarks"
-vimish-bind normal "ctrl-]" goto-next-bookmark-in-buffer
-vimish-bind normal "ctrl-o" goto-next-bookmark
-vimish-bind normal "ctrl-p" goto-prev-bookmark
+set bookmark-use-line-numbers       "1"
+set bookmark-character              "◙"
+set bookmark-color                  "fg 3333FF"
+set bookmarks-file                  "local.bookmarks"
+vimish-bind normal                  "ctrl-o" goto-prev-bookmark-in-buffer
+vimish-bind normal                  "ctrl-p" goto-next-bookmark-in-buffer
+vimish-bind normal                  "spc o" goto-prev-bookmark
+vimish-bind normal                  "spc p" goto-next-bookmark
+vimish-bind normal                  "spc i" set-bookmark-on-line
+vimish-bind normal                  "spc r" remove-bookmark-on-line
+vimish-bind normal                  "ctrl-r ctrl-r" remove-all-bookmarks-in-buffer
 
 ### @bar ###
 set status-line-left                "%[fg 252730 bg 3DBAAA]   %(git-variables-branch) %[fg 3DBAAA bg 9D57B3] %[fg 000000 bg 9D57B3] %f %b %[fg 9D57B3 bg F0428B]%[bg F0428B] %n %[fg F0428B]%[]"
@@ -86,12 +90,14 @@ set "mouse-menu-on-nothing"   "Build 'multi builder-start builder-view-output \"
                                H-Split frame-hsplit                                                                               \
                                V-Split frame-vsplit                                                                               \
                                Quit qa                                                                                            \
+                              'Remove Bookmarks' remove-all-bookmarks-in-buffer                                                   \
+                              'Toggle Term Mode' toggle-term-mode                                                                 \
                                'Save and Quit' wq"
 
 set-custom-buffer-frame    "tmp-center" "f" 1  0.15 0.15 0.70 0.70    0            "*bindings *calc *ctags-find-list *ypm-menu *grep-list *find-file-list"
 set-custom-buffer-frame    "man"        "f" 1  0.15 0.15 0.70 0.70    0            "*man-page"
 set-custom-buffer-frame    "log"        "s" 0  "v"  "r"  "r"  0.50  2 1  0.30  150 "*log"
-set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  0 0            "*term0"
+# set-custom-buffer-frame    "per-right"  "s" 0  "v"  "r"  "r"  0.50  0 0            "*term0"
 set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  150 "*go-menu"
 # set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
 
@@ -115,7 +121,7 @@ vimish-bind  normal  "spc h s p"  frame-hsplit
 vimish-bind  normal  "spc b o"    command-prompt "buffer "
 vimish-bind  normal  "spc b d"    buffer-delete
 vimish-bind  normal  "ctrl-n"     buffer-next
-vimish-bind  normal  "ctrl-p"     buffer-prev
+# vimish-bind  normal  "ctrl-p"     buffer-prev
 vimish-bind  normal  "M M"        man-word
 vimish-bind  normal  "L L"        command-prompt "cursor-line "
 vimish-bind  normal  "ctrl-l"     frame-next
@@ -145,6 +151,8 @@ vimish-bind  normal  "R R"        remove-all-frames-but-first
 vimish-bind  normal  "+"          diff-expand-truncated-lines
 vimish-bind  normal  "-"          diff-contract-truncated-lines
 # vimish-bind  normal  "ctrl-r"     frame-delete
+
+
 
 ### @project ###
 set builder-build-command "./build.sh"

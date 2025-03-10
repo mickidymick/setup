@@ -143,6 +143,10 @@ function yeddiff {
     yed -c "diff $1 $2";
 }
 
+function yedflame {
+    yed -c "set flame-graph-bind-mouse off" -c "flame-graph $1";
+}
+
 #add .local/bin to path
 PATH=$HOME/.local/bin:$PATH
 PATH=/usr/local/bin/qemu-system-riscv64:$PATH
