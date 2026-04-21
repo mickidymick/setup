@@ -1,0 +1,4 @@
+[submodule "yed"]
+	path = yed
+	url = git@github.com:your-editor/yed.git
+	branch = dev

@@ -1,0 +1,8 @@
+*.o
+*.so
+*.swp
+*~
+.DS_Store
+*.bak-*
+.ccls-cache/
+compile_commands.json

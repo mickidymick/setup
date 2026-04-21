@@ -18,6 +18,7 @@ set lang-bpftrace-extensions 'bt'
 
 ### Zach's Modified Plugins ###'
 plugins-add-dir '~/.config/yed/plugins'
+plugin-load 'yed_test'
 
 ### @variables ###
 set tab-width                       4
@@ -102,7 +103,7 @@ set-custom-buffer-frame    "tmp-right"  "s" 1  "v"  "r"  "r"  0.50  1 1  0.30  1
 # set-custom-buffer-frame    "tray"       "s" 0  "h"  "b"  "r"  0.25  0 1  0.10  90  "*builder-output"
 
 ### @LSP Servers ###
-lsp-define-server CCLS    ccls                         C C++
+lsp-define-server CLANGD  clangd --background-index    C C++
 lsp-define-server PYLSP   pylsp                        Python
 lsp-define-server BASHLSP "bash-language-server start" Shell
 
@@ -150,12 +151,16 @@ vimish-bind  normal  "ctrl-c v"   copy-to-universal-clipboard
 vimish-bind  normal  "R R"        remove-all-frames-but-first
 vimish-bind  normal  "+"          diff-expand-truncated-lines
 vimish-bind  normal  "-"          diff-contract-truncated-lines
+vimish-bind  normal  "ctrl-]"     toggle-bookmark-on-line
+vimish-bind  normal  "ctrl-p"     goto-next-bookmark
 # vimish-bind  normal  "ctrl-r"     frame-delete
 
 
 
 ### @project ###
-set builder-build-command "./build.sh"
+set builder-build-command './build.sh'
+unset builder-notify-command
+# set builder-notify-command ""
 
 # Load directory-specific rc file.
 yedrc-load ".yedrc"

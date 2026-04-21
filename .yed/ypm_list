@@ -43,7 +43,6 @@ lang/syntax/sh
 lang/syntax/yedrc
 lang/syntax/make
 lang/tools/latex
-builder
 loc_history
 fstyle
 lang/go
@@ -61,7 +60,6 @@ mouse
 make-tab
 lang/syntax/make
 mouse_frame_control
-yule_2021
 lang/syntax/diff_hl
 terminal
 extension_mapper
@@ -85,11 +83,15 @@ lang/syntax/jule
 lang/syntax/rust
 lang/syntax/scheme
 profile
-yule_2022
 lsp
-lsp_diagnostics
-lsp_info_popup
-tree_view
-line_numbers
 lsp_symbol_buffer
 diff
+tree_view
+lang/man
+lang/syntax/man
+styles/monokai
+styles/acme
+bookmarks
+lsp_info_popup
+builder
+lsp_diagnostics

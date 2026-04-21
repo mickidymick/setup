@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
+# Install clangd (C/C++ LSP) and bear (compile_commands.json generator).
+# yedrc is configured to use: lsp-define-server CLANGD clangd --background-index
 
-sudo apt -y bear install clang cmake libclang-dev llvm-dev rapidjson-dev
-cmake -H. -BRelease
-cmake --build Release
+set -e
 
-cd Release
-sudo make install
+sudo apt -y install clangd bear
