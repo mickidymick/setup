@@ -23,19 +23,23 @@ die()  { printf '[FAIL]'; [ -n "${1:-}" ] && printf ' %s' "$1"; printf '\n'; exi
 
 INSTALL_LSP=0
 HPC=0
+INSTALL_ZSH=0
 for arg in "$@"; do
     case "$arg" in
         --lsp) INSTALL_LSP=1 ;;
         --hpc) HPC=1 ;;
+        --zsh) INSTALL_ZSH=1 ;;
         -h|--help)
-            echo "Usage: $0 [--lsp] [--hpc]"
+            echo "Usage: $0 [--lsp] [--hpc] [--zsh]"
             echo "  --lsp   also install LSP servers"
             echo "          (default: clangd/bash/pylsp/marksman via sudo apt;"
             echo "           with --hpc: user-space installs, no sudo)"
             echo "  --hpc   HPC login-node mode (e.g. Frontier/OLCF): no sudo, no apt."
             echo "          Skips fonts + kitty.conf, appends to (never overwrites)"
-            echo "          .bashrc, and uses user-space LSP installs. Load a compiler"
-            echo "          module (e.g. 'module load gcc') before running."
+            echo "          shell rc files, and uses user-space LSP installs. Load a"
+            echo "          compiler module (e.g. 'module load gcc') before running."
+            echo "  --zsh   also install the zsh config (.zshrc). bash is still set up"
+            echo "          by default; this just adds zsh support alongside it."
             exit 0
             ;;
         *) echo "Unknown arg: $arg" >&2; exit 1 ;;
@@ -43,7 +47,8 @@ for arg in "$@"; do
 done
 
 echo "Logs: $LOG_DIR"
-[ "$HPC" = 1 ] && say "HPC mode: no sudo/apt, skipping fonts + kitty, appending to .bashrc"
+[ "$HPC" = 1 ] && say "HPC mode: no sudo/apt, skipping fonts + kitty, appending to shell rc(s)"
+[ "$INSTALL_ZSH" = 1 ] && say "zsh: will also install .zshrc alongside bash"
 
 # ----- 1. yed (submodule) -----
 say "yed (submodule, dev branch)"
@@ -76,26 +81,41 @@ fi
 
 # ----- 3. dotfiles -----
 say "Dotfiles"
-if [ "$HPC" = 1 ]; then
-    # Don't clobber the login node's .bashrc (it bootstraps the module system).
-    # Install ours alongside and source it via an idempotent guard block.
-    step ".bashrc.setup -> $HM/.bashrc.setup"
-    cp .bashrc "$HM/.bashrc.setup" && ok || die
-    step "source guard in $HM/.bashrc"
-    marker="# >>> setup repo (hpc) >>>"
-    if [ -f "$HM/.bashrc" ] && grep -qF "$marker" "$HM/.bashrc"; then
-        ok  # already present; nothing to append
+
+# install_rc <src-in-repo> <dest>
+#   HPC mode : install <dest>.setup and source it from <dest> via an idempotent
+#              guard block, so we never clobber a login node's rc (module init).
+#   normal   : overwrite <dest> with <src>.
+# The guard line ('. "$HOME/....setup"') is POSIX, so it works from bash or zsh.
+install_rc() {
+    local src="$1" dest="$2" base
+    base="$(basename "$dest")"
+    if [ "$HPC" = 1 ]; then
+        step "${base}.setup -> ${dest}.setup"
+        cp "$src" "${dest}.setup" && ok || die
+        step "source guard in $dest"
+        local marker="# >>> setup repo (hpc) >>>"
+        if [ -f "$dest" ] && grep -qF "$marker" "$dest"; then
+            ok  # already present; nothing to append
+        else
+            {
+                printf '\n%s\n' "$marker"
+                printf '[ -f "$HOME/%s.setup" ] && . "$HOME/%s.setup"\n' "$base" "$base"
+                printf '# <<< setup repo (hpc) <<<\n'
+            } >> "$dest" && ok || die
+        fi
     else
-        {
-            printf '\n%s\n' "$marker"
-            printf '[ -f "$HOME/.bashrc.setup" ] && . "$HOME/.bashrc.setup"\n'
-            printf '# <<< setup repo (hpc) <<<\n'
-        } >> "$HM/.bashrc" && ok || die
+        step "${base} -> $dest"
+        cp "$src" "$dest" && ok || die
     fi
+}
+
+install_rc .bashrc "$HM/.bashrc"
+[ "$INSTALL_ZSH" = 1 ] && install_rc .zshrc "$HM/.zshrc"
+
+if [ "$HPC" = 1 ]; then
     step "kitty.conf (skipped in HPC mode — local terminal config)"; ok
 else
-    step ".bashrc -> $HM/.bashrc"
-    cp .bashrc "$HM/.bashrc" && ok || die
     step "kitty.conf -> $HM/.config/kitty/kitty.conf"
     mkdir -p "$HM/.config/kitty" && cp kitty.conf "$HM/.config/kitty/kitty.conf" && ok || die
 fi
