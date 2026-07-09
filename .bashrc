@@ -147,6 +147,20 @@ function yedflame {
     yed -c "set flame-graph-bind-mouse off" -c "flame-graph $1";
 }
 
+# tab-completion for the setup repo's install.sh (works for ./install.sh too,
+# via bash's basename fallback). Offers only flags not already on the line.
+_setup_install_sh() {
+    local cur="${COMP_WORDS[COMP_CWORD]}" o w remaining=""
+    for o in --lsp --hpc --help; do
+        for w in "${COMP_WORDS[@]:1:COMP_CWORD-1}"; do
+            [ "$w" = "$o" ] && continue 2
+        done
+        remaining+=" $o"
+    done
+    COMPREPLY=( $(compgen -W "$remaining" -- "$cur") )
+}
+complete -F _setup_install_sh install.sh
+
 #add .local/bin to path
 PATH=$HOME/.local/bin:$PATH
 PATH=/usr/local/bin/qemu-system-riscv64:$PATH
