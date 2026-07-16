@@ -95,3 +95,5 @@ bookmarks
 lsp_info_popup
 builder
 lsp_diagnostics
+lang/syntax/yaml
+lang/yaml
