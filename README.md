@@ -9,7 +9,7 @@ All flags are opt-in and combinable; a bare `./install.sh` does the base install
 | Flag | What it does |
 | --- | --- |
 | *(none)* | Base install: build + install yed to `~/.local`, PowerlineSymbols font, `.bashrc`, `kitty.conf`, and compile yed plugins + config into `~/.config/yed`. |
-| `--lsp` | Also install LSP servers — `clangd`, `bash-language-server`, `pylsp`, `marksman` — via `sudo apt`. Under `--hpc`, uses user-space installs instead (no sudo). |
+| `--lsp` | Also install LSP servers: `clangd`, `bash-language-server`, `pylsp` (via `sudo apt`/`pip`), and `marksman` (prebuilt binary → `~/.local/bin`, no sudo). Under `--hpc`, all four use user-space installs. A server that fails to install no longer aborts the run — it's reported in the final summary. |
 | `--hpc` | HPC login-node mode (e.g. Frontier/OLCF): no sudo, no apt. Skips fonts + `kitty.conf` (both are local-terminal concerns), *appends* to shell rc files instead of overwriting them, and uses user-space LSP installs. `module load` a compiler (e.g. `module load gcc`) before running. |
 | `--zsh` | Also install the zsh config (`.zshrc`). bash is still set up by default — this adds zsh alongside it, it does not replace it. |
 | `--claude` | Install Claude Code (no sudo, to `~/.local/bin`) if not already on PATH, then install the statusLine script to `~/.claude` and merge the `statusLine` key into `~/.claude/settings.json`. Needs `jq`. |

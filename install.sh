@@ -21,6 +21,10 @@ ok()   { printf '[OK]\n'; }
 warn() { printf '[WARN] %s\n' "$*"; }
 die()  { printf '[FAIL]'; [ -n "${1:-}" ] && printf ' %s' "$1"; printf '\n'; exit 1; }
 
+# Non-fatal failures from optional steps; reported together at the end so one
+# broken add-on can't silently skip the rest of the requested install.
+FAILED=()
+
 INSTALL_LSP=0
 HPC=0
 INSTALL_ZSH=0
@@ -191,13 +195,13 @@ if [ "$INSTALL_LSP" = "1" ] && [ "$HPC" = 1 ]; then
         warn "clangd not on PATH — try 'module load llvm' (or clang/rocm); no user install here"
     fi
 
+    # Same prebuilt-binary install the normal path uses — defer to that script so
+    # the download URL and arch detection live in exactly one place.
     step "marksman (prebuilt binary -> ~/.local/bin)"
-    mkdir -p "$HM/.local/bin"
     if command -v curl >/dev/null 2>&1; then
-        if curl -fsSL -o "$HM/.local/bin/marksman" \
-            https://github.com/artempyanykh/marksman/releases/latest/download/marksman-linux-x64 \
-            >"$LOG_DIR/lsp-marksman.log" 2>&1 && chmod +x "$HM/.local/bin/marksman"; then ok
-        else warn "marksman download failed; see $LOG_DIR/lsp-marksman.log"; fi
+        if bash "${YED_DIR}/lsp_repos/markdown-language-server/build.sh" \
+            >"$LOG_DIR/lsp-marksman.log" 2>&1; then ok
+        else warn "marksman install failed; see $LOG_DIR/lsp-marksman.log"; fi
     else
         warn "curl not found; skipped marksman"
     fi
@@ -218,7 +222,10 @@ elif [ "$INSTALL_LSP" = "1" ]; then
         step "$name"
         if bash "$build" >"$log" 2>&1; then ok; else printf '[FAIL] see %s\n' "$log" >&2; lsp_status=1; fi
     done
-    [ $lsp_status -eq 0 ] || die "one or more LSP servers failed to install"
+    # Don't die here: LSP servers are an optional add-on, and aborting would skip
+    # unrelated later steps the user explicitly asked for (e.g. --claude). Record
+    # the failure and report it in the final summary instead.
+    [ $lsp_status -eq 0 ] || FAILED+=("LSP servers (see $LOG_DIR/lsp-*.log)")
 fi
 
 # ----- 7. Claude Code (optional) -----
@@ -290,4 +297,11 @@ if [ "$INSTALL_CLAUDE" = "1" ]; then
     fi
 fi
 
-say "All done. Logs: $LOG_DIR"
+if [ ${#FAILED[@]} -eq 0 ]; then
+    say "All done. Logs: $LOG_DIR"
+else
+    say "Done, with ${#FAILED[@]} failed step(s). Logs: $LOG_DIR"
+    for f in "${FAILED[@]}"; do printf '    [FAIL] %s\n' "$f"; done
+    printf '\nEverything else above installed fine.\n'
+    exit 1
+fi
