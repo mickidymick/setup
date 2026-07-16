@@ -24,13 +24,15 @@ die()  { printf '[FAIL]'; [ -n "${1:-}" ] && printf ' %s' "$1"; printf '\n'; exi
 INSTALL_LSP=0
 HPC=0
 INSTALL_ZSH=0
+INSTALL_CLAUDE=0
 for arg in "$@"; do
     case "$arg" in
         --lsp) INSTALL_LSP=1 ;;
         --hpc) HPC=1 ;;
         --zsh) INSTALL_ZSH=1 ;;
+        --claude) INSTALL_CLAUDE=1 ;;
         -h|--help)
-            echo "Usage: $0 [--lsp] [--hpc] [--zsh]"
+            echo "Usage: $0 [--lsp] [--hpc] [--zsh] [--claude]"
             echo "  --lsp   also install LSP servers"
             echo "          (default: clangd/bash/pylsp/marksman via sudo apt;"
             echo "           with --hpc: user-space installs, no sudo)"
@@ -40,6 +42,10 @@ for arg in "$@"; do
             echo "          compiler module (e.g. 'module load gcc') before running."
             echo "  --zsh   also install the zsh config (.zshrc). bash is still set up"
             echo "          by default; this just adds zsh support alongside it."
+            echo "  --claude"
+            echo "          install Claude Code (no sudo; ~/.local/bin) if not already"
+            echo "          on PATH, then install the statusLine script into ~/.claude"
+            echo "          and merge the statusLine key into ~/.claude/settings.json."
             exit 0
             ;;
         *) echo "Unknown arg: $arg" >&2; exit 1 ;;
@@ -49,6 +55,7 @@ done
 echo "Logs: $LOG_DIR"
 [ "$HPC" = 1 ] && say "HPC mode: no sudo/apt, skipping fonts + kitty, appending to shell rc(s)"
 [ "$INSTALL_ZSH" = 1 ] && say "zsh: will also install .zshrc alongside bash"
+[ "$INSTALL_CLAUDE" = 1 ] && say "claude: will install Claude Code + statusLine config"
 
 # ----- 1. yed (submodule) -----
 say "yed (submodule, dev branch)"
@@ -212,6 +219,75 @@ elif [ "$INSTALL_LSP" = "1" ]; then
         if bash "$build" >"$log" 2>&1; then ok; else printf '[FAIL] see %s\n' "$log" >&2; lsp_status=1; fi
     done
     [ $lsp_status -eq 0 ] || die "one or more LSP servers failed to install"
+fi
+
+# ----- 7. Claude Code (optional) -----
+if [ "$INSTALL_CLAUDE" = "1" ]; then
+    say "Claude Code"
+
+    # The native installer needs no sudo and drops the binary in ~/.local/bin,
+    # which is already on PATH from step 1 (and from .bashrc), so this works
+    # unchanged in HPC mode.
+    step "claude (check PATH)"
+    if command -v claude >/dev/null 2>&1; then
+        ok
+    else
+        printf '\n'
+        step "install via claude.ai/install.sh"
+        if curl -fsSL https://claude.ai/install.sh | bash >"$LOG_DIR/claude-install.log" 2>&1; then
+            ok
+        else
+            warn "install failed; see $LOG_DIR/claude-install.log"
+        fi
+    fi
+
+    # jq is a runtime dep of the statusLine script (it parses the JSON that
+    # Claude Code feeds it on stdin), and we use it below to merge settings.json.
+    step "jq"
+    if command -v jq >/dev/null 2>&1; then
+        ok
+    elif [ "$HPC" = 1 ]; then
+        warn "jq not on PATH — 'module load jq' first; statusLine needs it at runtime"
+    else
+        printf '\n'
+        step "apt install jq (sudo)"
+        if sudo apt -y install jq >"$LOG_DIR/claude-jq.log" 2>&1; then ok; else warn "see $LOG_DIR/claude-jq.log"; fi
+    fi
+
+    CLAUDE_DIR="$HM/.claude"
+    STATUSLINE="$CLAUDE_DIR/statusline-command.sh"
+    SETTINGS="$CLAUDE_DIR/settings.json"
+
+    step "statusline-command.sh -> $STATUSLINE"
+    mkdir -p "$CLAUDE_DIR" && cp "$DIR/.claude/statusline-command.sh" "$STATUSLINE" \
+        && chmod +x "$STATUSLINE" && ok || die
+
+    # Merge (don't overwrite): settings.json also holds per-machine keys like
+    # enabledPlugins/theme/tui that this repo doesn't manage. jq writes to a temp
+    # file first, so invalid JSON in an existing settings.json fails the merge
+    # instead of truncating it.
+    step "statusLine key -> settings.json"
+    if ! command -v jq >/dev/null 2>&1; then
+        warn "no jq; add manually: \"statusLine\": {\"type\":\"command\",\"command\":\"bash $STATUSLINE\"}"
+    else
+        tmp="$LOG_DIR/settings.json.tmp"
+        if [ -f "$SETTINGS" ]; then
+            if jq --arg cmd "bash $STATUSLINE" \
+                '.statusLine = {type: "command", command: $cmd}' "$SETTINGS" >"$tmp" 2>"$LOG_DIR/claude-settings.log"; then
+                cp "$SETTINGS" "${SETTINGS}.bak-$(date +%Y%m%d-%H%M%S)"
+                mv "$tmp" "$SETTINGS" && ok || die
+            else
+                warn "existing settings.json is not valid JSON; left untouched (see $LOG_DIR/claude-settings.log)"
+            fi
+        else
+            if jq -n --arg cmd "bash $STATUSLINE" \
+                '{statusLine: {type: "command", command: $cmd}}' >"$tmp" 2>"$LOG_DIR/claude-settings.log"; then
+                mv "$tmp" "$SETTINGS" && ok || die
+            else
+                warn "see $LOG_DIR/claude-settings.log"
+            fi
+        fi
+    fi
 fi
 
 say "All done. Logs: $LOG_DIR"

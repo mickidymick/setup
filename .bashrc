@@ -151,7 +151,7 @@ function yedflame {
 # via bash's basename fallback). Offers only flags not already on the line.
 _setup_install_sh() {
     local cur="${COMP_WORDS[COMP_CWORD]}" o w remaining=""
-    for o in --lsp --hpc --zsh --help; do
+    for o in --lsp --hpc --zsh --claude --help; do
         for w in "${COMP_WORDS[@]:1:COMP_CWORD-1}"; do
             [ "$w" = "$o" ] && continue 2
         done

@@ -18,6 +18,7 @@ files=(
     "kitty.conf:$HM/.config/kitty/kitty.conf"
     ".yed/yedrc:$HM/.config/yed/yedrc"
     ".yed/ypm_list:$HM/.config/yed/ypm_list"
+    ".claude/statusline-command.sh:$HM/.claude/statusline-command.sh"
 )
 
 backup() {
